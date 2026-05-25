@@ -1,0 +1,593 @@
+/* ═══════════════════════════════════════════════════════════════
+   Cash-Flow – styles.css
+   Design System: CSS variables drive light/dark theming.
+   Fonts: DM Serif Display (headings) + DM Sans (body)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Design Tokens (Light Theme) ──────────────────────────── */
+:root {
+  /* Background layers */
+  --bg-page:        #f0f4f9;
+  --bg-panel:       #ffffff;
+  --bg-input:       #f8fafc;
+  --bg-hover:       #f1f5f9;
+
+  /* Brand */
+  --brand-primary:  #0f766e;        /* teal */
+  --brand-dark:     #0d6560;
+  --brand-light:    #ccfbf1;
+
+  /* Text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+  --text-on-brand:  #ffffff;
+
+  /* Borders */
+  --border:         #e2e8f0;
+  --border-focus:   #0f766e;
+
+  /* Semantic */
+  --danger:         #dc2626;
+  --danger-bg:      #fef2f2;
+  --danger-border:  #fecaca;
+  --warn:           #b45309;
+  --warn-bg:        #fffbeb;
+  --warn-border:    #fde68a;
+
+  /* Cards accent strips */
+  --card-salary-accent:   #0f766e;
+  --card-expense-accent:  #b45309;
+  --card-balance-accent:  #1d4ed8;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(15,23,42,0.06), 0 1px 2px rgba(15,23,42,0.04);
+  --shadow-md: 0 4px 16px rgba(15,23,42,0.08), 0 2px 6px rgba(15,23,42,0.04);
+  --shadow-lg: 0 12px 32px rgba(15,23,42,0.10);
+
+  /* Misc */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --transition: 0.18s ease;
+}
+
+/* ─── 2. Dark Theme Override ───────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-page:        #0c1220;
+  --bg-panel:       #141d2e;
+  --bg-input:       #1a2540;
+  --bg-hover:       #1e2d47;
+
+  --brand-primary:  #14b8a6;
+  --brand-dark:     #0d9488;
+  --brand-light:    #042f2e;
+
+  --text-primary:   #e8edf5;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+  --text-on-brand:  #ffffff;
+
+  --border:         #1e3050;
+  --border-focus:   #14b8a6;
+
+  --danger:         #f87171;
+  --danger-bg:      #2a1515;
+  --danger-border:  #7f1d1d;
+  --warn:           #fbbf24;
+  --warn-bg:        #271e0a;
+  --warn-border:    #78350f;
+
+  --card-salary-accent:   #14b8a6;
+  --card-expense-accent:  #f59e0b;
+  --card-balance-accent:  #60a5fa;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+}
+
+/* ─── 3. Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  line-height: 1.15;
+  margin: 0;
+}
+
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* ─── 4. Top Navigation Bar ────────────────────────────────────── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1200px, 100% - 40px);
+  margin: 0 auto;
+  padding: 12px 0;
+  gap: 16px;
+}
+
+/* Brand logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  background: var(--brand-primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+}
+
+.brand-accent { color: var(--brand-primary); }
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ─── 5. Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: background var(--transition), color var(--transition), transform 0.1s, box-shadow var(--transition);
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--brand-primary);
+  color: var(--text-on-brand);
+}
+.btn-primary:hover { background: var(--brand-dark); box-shadow: var(--shadow-md); }
+
+.btn-ghost {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { background: var(--border); color: var(--text-primary); }
+
+.btn-full { width: 100%; }
+
+/* ─── 6. Dark Mode Toggle ──────────────────────────────────────── */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  font-size: 1.1rem;
+}
+.theme-toggle:hover { background: var(--bg-hover); }
+
+/* ─── 7. Layout Shell ──────────────────────────────────────────── */
+.app-shell {
+  width: min(1200px, 100% - 40px);
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+/* ─── 8. Summary Cards ─────────────────────────────────────────── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.summary-card {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px 18px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Coloured accent strip at top */
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.card--salary::before   { background: var(--card-salary-accent); }
+.card--expenses::before { background: var(--card-expense-accent); }
+.card--balance::before  { background: var(--card-balance-accent); }
+
+.card-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.card-value {
+  display: block;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 10px;
+  transition: color var(--transition);
+}
+
+.card-value.low-balance { color: var(--danger); }
+
+.card-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+
+/* ─── 9. Threshold Banner ──────────────────────────────────────── */
+.threshold-banner {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 14px 20px;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  border-radius: var(--radius-md);
+  color: var(--warn);
+  font-weight: 600;
+  font-size: 0.88rem;
+  animation: slideDown 0.25s ease;
+}
+.threshold-banner.visible { display: flex; }
+.banner-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── 10. Main Content Grid ────────────────────────────────────── */
+.content-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* ─── 11. Panels ───────────────────────────────────────────────── */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.input-panel { padding: 0; overflow: hidden; }
+
+.panel-section {
+  padding: 22px 24px;
+}
+
+.panel-section.currency-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 0;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.section-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* ─── 12. Salary Row ───────────────────────────────────────────── */
+.salary-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.salary-row .field-group { flex: 1; }
+.salary-row .btn { flex-shrink: 0; height: 44px; }
+
+/* ─── 13. Form & Fields ────────────────────────────────────────── */
+.expense-form { display: grid; gap: 14px; }
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field-group {
+  display: grid;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  min-height: 44px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  appearance: none;
+}
+
+input:focus {
+  border-color: var(--border-focus);
+  background: var(--bg-panel);
+  box-shadow: 0 0 0 3px rgba(15,118,110,0.15);
+  outline: none;
+}
+
+[data-theme="dark"] input:focus {
+  box-shadow: 0 0 0 3px rgba(20,184,166,0.2);
+}
+
+.error-message {
+  min-height: 18px;
+  color: var(--danger);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ─── 14. Currency Toggle ──────────────────────────────────────── */
+.currency-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-input);
+}
+
+.currency-btn {
+  min-width: 70px;
+  height: 36px;
+  padding: 0 14px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.currency-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.currency-btn.active { background: var(--brand-primary); color: #fff; }
+
+/* ─── 15. Expense Count Badge ──────────────────────────────────── */
+.expense-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+
+/* ─── 16. Expense List ─────────────────────────────────────────── */
+.expenses-panel { padding: 0 0 16px; }
+
+.expense-list {
+  display: grid;
+  gap: 8px;
+  padding: 14px 20px 0;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.expense-list::-webkit-scrollbar { width: 4px; }
+.expense-list::-webkit-scrollbar-track { background: transparent; }
+.expense-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.expense-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  animation: fadeIn 0.2s ease;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.expense-item:hover { background: var(--bg-hover); }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.expense-name {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  overflow-wrap: anywhere;
+}
+
+.expense-amount {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Numbering badge */
+.expense-num {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background: var(--border);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.delete-btn {
+  display: grid;
+  place-items: center;
+  width: 32px; height: 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.delete-btn:hover { background: var(--danger-bg); color: var(--danger); }
+
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: 36px 24px;
+  line-height: 2;
+}
+.empty-icon { font-size: 2rem; display: block; }
+
+/* ─── 17. Chart Panel ──────────────────────────────────────────── */
+.right-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.chart-panel { padding: 20px; }
+
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+#cashFlowChart {
+  max-width: 280px;
+  max-height: 280px;
+}
+
+/* ─── 18. Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell { width: calc(100% - 24px); padding: 16px 0 40px; }
+
+  .summary-grid { grid-template-columns: 1fr; }
+
+  .field-grid { grid-template-columns: 1fr; }
+
+  .salary-row { flex-direction: column; align-items: stretch; }
+  .salary-row .btn { width: 100%; }
+
+  .topbar-inner { width: calc(100% - 24px); }
+
+  .brand-name { display: none; }
+
+  #cashFlowChart { max-width: 220px; max-height: 220px; }
+}

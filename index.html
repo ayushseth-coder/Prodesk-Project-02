@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cash-Flow | Salary & Expense Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ─── Top Navigation Bar ─────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-icon">₹</span>
+        <span class="brand-name">Cash<span class="brand-accent">Flow</span></span>
+      </div>
+      <div class="topbar-actions">
+        <button id="downloadPdfBtn" class="btn btn-ghost" type="button">
+          ↓ PDF Report
+        </button>
+        <!-- Dark mode toggle -->
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <span class="theme-icon" id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+
+    <!-- ─── Summary Cards ─────────────────────────────────────────── -->
+    <section class="summary-grid" aria-label="Financial summary">
+      <article class="summary-card card--salary">
+        <p class="card-label">Total Salary</p>
+        <strong id="salaryDisplay" class="card-value">₹ 0.00</strong>
+        <span class="card-badge">Monthly</span>
+      </article>
+
+      <article class="summary-card card--expenses">
+        <p class="card-label">Total Expenses</p>
+        <strong id="expensesDisplay" class="card-value">₹ 0.00</strong>
+        <span class="card-badge">Spent</span>
+      </article>
+
+      <article class="summary-card card--balance">
+        <p class="card-label">Remaining Balance</p>
+        <strong id="balanceDisplay" class="card-value">₹ 0.00</strong>
+        <span class="card-badge">Available</span>
+      </article>
+    </section>
+
+    <!-- ─── Threshold Banner ───────────────────────────────────────── -->
+    <div id="thresholdBanner" class="threshold-banner" role="alert" aria-live="polite">
+      <span class="banner-icon">⚠️</span>
+      <span>Warning: Remaining balance has dropped below <strong>10%</strong> of your salary.</span>
+    </div>
+
+    <div class="content-grid">
+
+      <!-- ─── Left: Input Panel ──────────────────────────────────── -->
+      <section class="panel input-panel">
+
+        <!-- Salary updater (separate from expense form) -->
+        <div class="panel-section">
+          <h2 class="section-title">Salary</h2>
+          <p class="section-sub">You can update your salary at any time.</p>
+          <div class="salary-row">
+            <div class="field-group">
+              <label for="salaryInput">Monthly Salary</label>
+              <input id="salaryInput" type="number" min="0" step="0.01" placeholder="e.g. 75000" />
+            </div>
+            <button id="updateSalaryBtn" class="btn btn-primary" type="button">Update</button>
+          </div>
+          <p id="salaryError" class="error-message" aria-live="polite"></p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Expense form -->
+        <div class="panel-section">
+          <h2 class="section-title">Add Expense</h2>
+          <form id="expenseForm" class="expense-form" novalidate>
+            <div class="field-grid">
+              <div class="field-group">
+                <label for="expenseNameInput">Expense Name</label>
+                <input id="expenseNameInput" type="text" placeholder="e.g. Rent" />
+              </div>
+              <div class="field-group">
+                <label for="expenseAmountInput">Amount</label>
+                <input id="expenseAmountInput" type="number" min="0" step="0.01" placeholder="e.g. 12000" />
+              </div>
+            </div>
+            <button class="btn btn-primary btn-full" type="submit">+ Add Expense</button>
+            <p id="errorMessage" class="error-message" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Currency toggle -->
+        <div class="panel-section currency-section">
+          <span class="section-title">Currency</span>
+          <div class="currency-toggle" aria-label="Currency selector">
+            <button id="inrBtn" class="currency-btn active" type="button">INR ₹</button>
+            <button id="usdBtn" class="currency-btn" type="button">USD $</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ─── Right: Expenses + Chart ────────────────────────────── -->
+      <div class="right-stack">
+
+        <!-- Expense list -->
+        <section class="panel expenses-panel">
+          <div class="panel-header">
+            <h2 class="section-title">Expenses</h2>
+            <span id="expenseCount" class="expense-count">0 items</span>
+          </div>
+          <ul id="expenseList" class="expense-list"></ul>
+          <p id="emptyState" class="empty-state">
+            <span class="empty-icon">📭</span><br/>No expenses added yet.
+          </p>
+        </section>
+
+        <!-- Pie chart -->
+        <section class="panel chart-panel">
+          <h2 class="section-title">Cash Split</h2>
+          <div class="chart-wrapper">
+            <canvas id="cashFlowChart" aria-label="Pie chart: expenses vs balance"></canvas>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
