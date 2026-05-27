@@ -42,20 +42,6 @@ This structure makes the app **easy to debug, extend, and migrate to React later
 
 ---
 
-## 🎥 QA Demonstration Checklist
-
-During the 2-minute demo, the following are demonstrated:
-- Salary update logic
-- Expense addition & deletion
-- Balance recalculation
-- Page reload with persisted data
-- Chart update behavior
-- PDF download
-- Currency toggle
-- Threshold alert
-
----
-
 ## ✅ Sprint Status
 
 - Phase 1 (Mandatory): **Completed**
@@ -68,6 +54,7 @@ All Sprint 02 deliverables successfully implemented using Vanilla JavaScript.
 Github LInk--"https://github.com/ayushseth-coder" 
 linkedin LInk--"https://linkedin.com/in/ayush-seth-b4265828a"
 viedo LInk--""
+Web Screenshot--"![Screenshot](image.png)"
 
 ## 👤 Author
 
