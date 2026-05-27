@@ -54,7 +54,7 @@ All Sprint 02 deliverables successfully implemented using Vanilla JavaScript.
 Github LInk--"https://github.com/ayushseth-coder" 
 linkedin LInk--"https://linkedin.com/in/ayush-seth-b4265828a"
 vercel LInk--"https://prodesk-project-02.vercel.app"
-viedo LInk--""
+viedo LInk--"https://www.loom.com/share/9b3db74335df42e6862e6ae8ce8fd271"
 Web Screenshot--"![Screenshot](image.png)"
 
 ## 👤 Author
